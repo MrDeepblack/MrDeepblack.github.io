@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>King Drive - Layanan Transportasi Online</title>
+    <style>
+     /* Gaya CSS untuk tampilan modern dan bertema taksi */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #F5F5F5;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 24px;
+}
+
+.container {
+    background-color: #fff;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+}
+
+h1, h2 {
+    color: #333;
+    text-align: center;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+a {
+    text-decoration: none;
+    color: #007BFF;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="number"], select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+button {
+    background-color: #FF5722;
+    color: #fff;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #E64A19;
+}
+
+.result {
+    margin-top: 10px;
+    font-weight: bold;
+    text-align: center;
+    font-size: 18px;
+    color: #333;
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Selamat datang di King Drive - Layanan Transportasi Online</h1>
+    </header>
+    <div class="container">
+        <h2>Menu</h2>
+        <ul>
+            <li><a href="#" id="tarifDalamKotaLink">Cek Tarif Dalam Kota</a></li>
+            <li><a href="#" id="tarifAntarKotaLink">Cek Tarif Antar Kota</a></li>
+            <li><a href="#" id="sewaMobilLink">Sewa Mobil + Supir</a></li>
+        </ul>
+    </div>
+
+    <div class="container" id="menuTarifDalamKota" style="display: none;">
+        <h2>Cek Tarif Dalam Kota</h2>
+        <label for="jenisLayanan">Jenis Layanan:</label>
+        <select id="jenisLayanan">
+            <option value="innova">Toyota Innova Luxury 2.0</option>
+            <option value="avanza">Toyota Avanza S 1.5</option>
+            <option value="xeniaAllNew">Xenia All new 1.0</option>
+            <option value="xeniaOld">Xenia Old 1.0</option>
+        </select>
+        <label for="jarak">Jarak (km):</label>
+        <input type="number" id="jarak" placeholder="Masukkan jarak dalam kilometer">
+        <label for="biayaBagasi">Biaya Bagasi (opsional):</label>
+        <input type="number" id="biayaBagasi" placeholder="Biaya bagasi tambahan">
+        <label for="waktuTunggu">Waktu Tunggu (menit):</label>
+        <input type="number" id="waktuTunggu" placeholder="Waktu tunggu dalam menit">
+        <button id="hitungTarifDalamKota">Hitung Tarif</button>
+        <div class="result" id="resultTarifDalamKota"></div>
+        <button id="pesanTarifDalamKota">Pesan Layanan Sekarang</button>
+    </div>
+
+    <div class="container" id="menuTarifAntarKota" style="display: none;">
+        <h2>Cek Tarif Antar Kota</h2>
+        <label for="jenisLayananAntarKota">Jenis Layanan:</label>
+        <select id="jenisLayananAntarKota">
+            <option value="innova">Toyota Innova Luxury 2.0</option>
+            <option value="avanza">Toyota Avanza S 1.5</option>
+            <option value="xeniaAllNew">Xenia All new 1.0</option>
+            <option value="xeniaOld">Xenia Old 1.0</option>
+        </select>
+        <label for="jarakAntarKota">Jarak (km):</label>
+        <input type="number" id="jarakAntarKota" placeholder="Masukkan jarak dalam kilometer">
+        <button id="hitungTarifAntarKota">Hitung Tarif</button>
+        <div class="result" id="resultTarifAntarKota"></div>
+        <button id="pesanTarifAntarKota">Pesan Layanan Sekarang</button>
+    </div>
+
+   <div class="container" id="menuSewaMobil" style="display: none;">
+    <h2>Sewa Mobil + Supir</h2>
+    <label for="jenisLayananSewa">Jenis Layanan:</label>
+    <select id="jenisLayananSewa">
+        <option value="innova">Toyota Innova Luxury 2.0</option>
+        <option value="avanza">Toyota Avanza S 1.5</option>
+        <option value="xeniaAllNew">Xenia All new 1.0</option>
+        <option value="xeniaOld">Xenia Old 1.0</option>
+    </select>
+    <label for="durasi">Durasi:</label>
+    <select id="durasi">
+        <option value="jam">Per Jam</option>
+        <option value="hari">Per Hari</option>
+    </select>
+    <label for="jumlahJamHari">Jumlah Jam/Hari:</label>
+    <input type="number" id="jumlahJamHari" placeholder="Masukkan jumlah jam/hari">
+    <button id="hitungTarifSewa">Hitung Tarif</button>
+    <div class="result" id="resultTarifSewa"></div>
+    <button id="pesanTarifSewa">Pesan Layanan Sekarang</button>
+</div>
+
+    <script>
+        function showMenu(menuId) {
+            document.getElementById(menuId).style.display = "block";
+        }
+
+        function hideMenus() {
+            var menus = ["menuTarifDalamKota", "menuTarifAntarKota", "menuSewaMobil"];
+            menus.forEach(function(menuId) {
+                document.getElementById(menuId).style.display = "none";
+            });
+        }
+
+        document.getElementById("tarifDalamKotaLink").addEventListener("click", function() {
+            hideMenus();
+            showMenu("menuTarifDalamKota");
+        });
+
+        document.getElementById("tarifAntarKotaLink").addEventListener("click", function() {
+            hideMenus();
+            showMenu("menuTarifAntarKota");
+        });
+
+        document.getElementById("sewaMobilLink").addEventListener("click", function() {
+            hideMenus();
+            showMenu("menuSewaMobil");
+        });
+
+        function formatRupiah(angka) {
+            var reverse = angka.toString().split('').reverse().join(''),
+                ribuan = reverse.match(/\d{1,3}/g);
+            ribuan = ribuan.join('.').split('').reverse().join('');
+            return 'Rp ' + ribuan;
+        }
+
+        // Fungsi untuk menghitung tarif Dalam Kota
+        function hitungTarifDalamKota(jenisLayanan, jarak, biayaBagasi, waktuTunggu) {
+            var tarifPerKm = 0;
+
+            switch (jenisLayanan) {
+                case "innova":
+                    tarifPerKm = 5200;
+                    break;
+                case "avanza":
+                case "xeniaAllNew":
+                case "xeniaOld":
+                    tarifPerKm = 4800;
+                    break;
+                default:
+                    break;
+            }
+
+            var biayaPerjalanan = tarifPerKm * jarak + (biayaBagasi || 0) + (waktuTunggu * 500 || 0);
+
+            return {
+                tarifPerKm: tarifPerKm,
+                biayaPerjalanan: biayaPerjalanan
+            };
+        }
+
+        // Event listener untuk tombol "Hitung Tarif Dalam Kota"
+        document.getElementById("hitungTarifDalamKota").addEventListener("click", function() {
+            var jenisLayanan = document.getElementById("jenisLayanan").value;
+            var jarak = parseFloat(document.getElementById("jarak").value);
+            var biayaBagasi = parseFloat(document.getElementById("biayaBagasi").value);
+            var waktuTunggu = parseFloat(document.getElementById("waktuTunggu").value);
+
+            var hasilTarif = hitungTarifDalamKota(jenisLayanan, jarak, biayaBagasi, waktuTunggu);
+            document.getElementById("resultTarifDalamKota").innerHTML = "Biaya Perjalanan: " + formatRupiah(hasilTarif.biayaPerjalanan.toFixed(2));
+            document.getElementById("pesanTarifDalamKota").style.display = "block";
+
+            // Event listener untuk tombol "Pesan Layanan Sekarang"
+            document.getElementById("pesanTarifDalamKota").addEventListener("click", function() {
+                var pesan = "Saya ingin memesan layanan " + jenisLayanan + " dengan jarak " + jarak + " km. Total biaya: " + formatRupiah(hasilTarif.biayaPerjalanan.toFixed(2));
+                kirimPesanWhatsApp(pesan);
+            });
+        });
+
+        // Fungsi untuk menghitung tarif Antar Kota
+        function hitungTarifAntarKota(jenisLayanan, jarak) {
+            var tarifPerKm = 5100;
+
+            var biayaPerjalanan = tarifPerKm * jarak;
+
+            return {
+                tarifPerKm: tarifPerKm,
+                biayaPerjalanan: biayaPerjalanan
+            };
+        }
+
+        // Event listener untuk tombol "Hitung Tarif Antar Kota"
+        document.getElementById("hitungTarifAntarKota").addEventListener("click", function() {
+            var jenisLayanan = document.getElementById("jenisLayananAntarKota").value;
+            var jarak = parseFloat(document.getElementById("jarakAntarKota").value);
+
+            var hasilTarif = hitungTarifAntarKota(jenisLayanan, jarak);
+            document.getElementById("resultTarifAntarKota").innerHTML = "Biaya Perjalanan: " + formatRupiah(hasilTarif.biayaPerjalanan.toFixed(2));
+            document.getElementById("pesanTarifAntarKota").style.display = "block";
+
+            // Event listener untuk tombol "Pesan Layanan Sekarang"
+            document.getElementById("pesanTarifAntarKota").addEventListener("click", function() {
+                var pesan = "Saya ingin memesan layanan " + jenisLayanan + " dengan jarak " + jarak + " km. Total biaya: " + formatRupiah(hasilTarif.biayaPerjalanan.toFixed(2));
+                kirimPesanWhatsApp(pesan);
+            });
+        });
+
+        // Fungsi untuk menghitung tarif Sewa Mobil
+        function hitungTarifSewa(jenisLayanan, durasi, jumlahJamHari) {
+            var tarif = 0;
+
+            switch (jenisLayanan) {
+                case "innova":
+                    tarif = (durasi === "jam") ? 95000 * jumlahJamHari : 650000 * jumlahJamHari;
+                    break;
+                case "avanza":
+                case "xeniaAllNew":
+                case "xeniaOld":
+                    tarif = (durasi === "jam") ? 75000 * jumlahJamHari : 500000 * jumlahJamHari;
+                    break;
+                default:
+                    break;
+            }
+
+            return {
+                tarif: tarif
+            };
+        }
+
+        // Event listener untuk tombol "Hitung Tarif Sewa Mobil"
+        document.getElementById("hitungTarifSewa").addEventListener("click", function() {
+            var jenisLayanan = document.getElementById("jenisLayananSewa").value;
+            var durasi = document.getElementById("durasi").value;
+            var jumlahJamHari = parseFloat(document.getElementById("jumlahJamHari").value);
+
+            var hasilTarif = hitungTarifSewa(jenisLayanan, durasi, jumlahJamHari);
+            document.getElementById("resultTarifSewa").innerHTML = "Biaya Sewa: " + formatRupiah(hasilTarif.tarif.toFixed(2));
+            document.getElementById("pesanTarifSewa").style.display = "block";
+
+            // Event listener untuk tombol "Pesan Layanan Sekarang"
+            document.getElementById("pesanTarifSewa").addEventListener("click", function() {
+                var pesan = "Saya ingin menyewa " + jenisLayanan + " selama " + jumlahJamHari + " " + durasi + ". Total biaya: " + formatRupiah(hasilTarif.tarif.toFixed(2));
+                kirimPesanWhatsApp(pesan);
+            });
+        });
+
+        // Fungsi untuk mengirim pesan WhatsApp
+        function kirimPesanWhatsApp(pesan) {
+            var noWhatsApp = "+6282194792916";
+            var url = "https://api.whatsapp.com/send?phone=" + noWhatsApp + "&text=" + encodeURIComponent(pesan);
+            window.open(url);
+        }
+    </script>
+</body>
+</html>
